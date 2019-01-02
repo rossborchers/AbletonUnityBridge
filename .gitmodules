@@ -1,0 +1,3 @@
+[submodule "Modules/Link"]
+	path = Modules/Link
+	url = https://github.com/Ableton/link
