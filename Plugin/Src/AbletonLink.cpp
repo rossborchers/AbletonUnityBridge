@@ -22,7 +22,7 @@ AbletonLink::~AbletonLink()
 	}
 }
 
-void AbletonLink::setup(double tempo)
+void AbletonLink::Setup(double tempo)
 {
 	if (link_ != nullptr) {
 		link_->enable(false);
@@ -43,7 +43,7 @@ void AbletonLink::setup(double tempo)
 	link_->enable(true);
 }
 
-void AbletonLink::setTempo(double bpm)
+void AbletonLink::SetTempo(double bpm)
 {
 	if (link_ == nullptr)
 	{
@@ -55,7 +55,7 @@ void AbletonLink::setTempo(double bpm)
 	link_->commitAppSessionState(state);
 }
 
-double AbletonLink::tempo()
+double AbletonLink::Tempo()
 {
 	if (link_ == nullptr)
 	{
@@ -64,17 +64,17 @@ double AbletonLink::tempo()
 	return link_->captureAppSessionState().tempo();
 }
 
-void AbletonLink::setQuantum(double quantum)
+void AbletonLink::SetQuantum(double quantum)
 {
 	this->quantum_ = fmin(fmax(quantum, 2.0), 16.0);
 }
 
-double AbletonLink::quantum()
+double AbletonLink::Quantum()
 {
 	return quantum_;
 }
 
-void AbletonLink::forceBeatAtTime(double beat)
+void AbletonLink::ForceBeatAtTime(double beat)
 {
 	if (link_ == nullptr)
 	{
@@ -86,7 +86,7 @@ void AbletonLink::forceBeatAtTime(double beat)
 	link_->commitAppSessionState(state);
 }
 
-void AbletonLink::requestBeatAtTime(double beat)
+void AbletonLink::RequestBeatAtTime(double beat)
 {
 	if (link_ == nullptr)
 	{
@@ -98,7 +98,7 @@ void AbletonLink::requestBeatAtTime(double beat)
 	link_->commitAppSessionState(state);
 }
 
-void AbletonLink::enable(bool bEnable)
+void AbletonLink::Enable(bool bEnable)
 {
 	if (link_ == nullptr)
 	{
@@ -107,7 +107,7 @@ void AbletonLink::enable(bool bEnable)
 	link_->enable(bEnable);
 }
 
-bool AbletonLink::isEnabled() const
+bool AbletonLink::IsEnabled() const
 {
 	if (link_ == nullptr)
 	{
@@ -116,7 +116,7 @@ bool AbletonLink::isEnabled() const
 	return link_->isEnabled();
 }
 
-std::size_t AbletonLink::numPeers()
+std::size_t AbletonLink::NumPeers()
 {
 	if (link_ == nullptr)
 	{
@@ -125,7 +125,7 @@ std::size_t AbletonLink::numPeers()
 	return link_->numPeers();
 }
 
-AbletonLink::Status AbletonLink::update()
+AbletonLink::Status AbletonLink::Update()
 {
 	Status status;
 	if (link_ == nullptr)
@@ -154,10 +154,10 @@ AbletonLink::Status AbletonLink::update()
 	return status;
 }
 
-//void MyAbletonLink::setNumPeersCallback(numPeersCallback cb) {
+//void MyAbletonLink::SetNumPeersCallback(numPeersCallback cb) {
 //    npc = cb;
 //}
 //
-//void MyAbletonLink::setTempoCallback(tempoCallback cb) {
+//void MyAbletonLink::SetTempoCallback(tempoCallback cb) {
 //    tc = cb;
 //}

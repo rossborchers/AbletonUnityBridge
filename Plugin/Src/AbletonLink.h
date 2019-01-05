@@ -54,23 +54,23 @@ public:
 	AbletonLink(AbletonLink&&) = delete;
 	AbletonLink& operator=(AbletonLink&&) = delete;
 
-	void setup(double bpm);
+	void Setup(double bpm);
 
-	void setTempo(double bpm);
-	double tempo();
+	void SetTempo(double bpm);
+	double Tempo();
 
-	void setQuantum(double quantum);
-	double quantum();
+	void SetQuantum(double quantum);
+	double Quantum();
 
-	void forceBeatAtTime(double beat);
-	void requestBeatAtTime(double beat);
+	void ForceBeatAtTime(double beat);
+	void RequestBeatAtTime(double beat);
 
-	void enable(bool bEnable);
-	bool isEnabled() const;
+	void Enable(bool bEnable);
+	bool IsEnabled() const;
 
-	std::size_t numPeers();
+	std::size_t NumPeers();
 
-	Status update();
+	Status Update();
 
 	//    void setNumPeersCallback(numPeersCallback cb);
 	//    void setTempoCallback(tempoCallback cb);
