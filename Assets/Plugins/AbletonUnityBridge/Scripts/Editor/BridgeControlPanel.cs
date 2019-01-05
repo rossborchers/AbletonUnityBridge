@@ -12,10 +12,21 @@ public class BridgeControlPanel : EditorWindow
 		EditorWindow.GetWindow(typeof(BridgeControlPanel));
 	}
 
+	private bool _foldLink = false;
+
 	void OnGUI()
 	{
-		AbletonLink.Instance.Enable(GUILayout.Toggle(AbletonLink.Instance.IsEnabled(), "Enabled"));
-		GUILayout.Label("Enabled: " + AbletonLink.Instance.IsEnabled(), EditorStyles.boldLabel);
-		GUILayout.Label("Peers: " + AbletonLink.Instance.NumPeers(), EditorStyles.boldLabel);
+		_foldLink = EditorGUILayout.Foldout(_foldLink, "Link");
+		if(_foldLink)
+		{
+			AbletonLink.Instance.Enable(GUILayout.Toggle(AbletonLink.Instance.IsEnabled(), "Enabled"));
+			GUILayout.Label("Enabled: " + AbletonLink.Instance.IsEnabled(), EditorStyles.boldLabel);
+			GUILayout.Label("Peers: " + AbletonLink.Instance.NumPeers(), EditorStyles.boldLabel);
+
+			GUILayout.BeginHorizontal();
+			GUILayout.Label("Tempo: " + AbletonLink.Instance.Tempo(), EditorStyles.boldLabel);
+			AbletonLink.Instance.SetTempo(GUILayout.HorizontalSlider((float)AbletonLink.Instance.Tempo(), 40, 240));
+			GUILayout.EndHorizontal();
+		}
 	}
 }
