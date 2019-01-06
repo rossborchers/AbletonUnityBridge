@@ -75,14 +75,14 @@ public:
 	//    void setNumPeersCallback(numPeersCallback cb);
 	//    void setTempoCallback(tempoCallback cb);
 private:
-	ableton::Link* link_;
-	double quantum_;
+	ableton::Link* _link;
+	double _quantum;
 
-	bool isNumPeersChanged_;
-	int numPeers_;
+	bool _isNumPeersChanged;
+	int _numPeers;
 
-	bool isTempoChanged_;
-	double tempo_;
+	bool _isTempoChanged;
+	double _tempo;
 
 	//    numPeersCallback npc;
 	//    tempoCallback tc;

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 public class AbletonLink: IDisposable
 {
-    private static object lockOjbect = new object();
+    private static object lockObject = new object();
     private static volatile AbletonLink singletonInstance;
     private IntPtr nativeInstance = IntPtr.Zero;
     private const double INITIAL_TEMPO = 120.0;
@@ -18,7 +18,7 @@ public class AbletonLink: IDisposable
         {
             if (singletonInstance == null)
             {
-                lock (lockOjbect)
+                lock (lockObject)
                 {
                     singletonInstance = new AbletonLink();
                     singletonInstance.Setup(INITIAL_TEMPO);

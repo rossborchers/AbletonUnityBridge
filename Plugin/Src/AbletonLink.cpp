@@ -4,144 +4,144 @@
 #include <cmath>
 
 AbletonLink::AbletonLink()
-	: link_(nullptr),
-	quantum_(4.0),
-	isNumPeersChanged_(false),
-	numPeers_(0),
-	isTempoChanged_(false),
-	tempo_(0.0)
+	: _link(nullptr),
+	_quantum(4.0),
+	_isNumPeersChanged(false),
+	_numPeers(0),
+	_isTempoChanged(false),
+	_tempo(0.0)
 	//    , npc(nullptr), tc(nullptr)
 {
 }
 
 AbletonLink::~AbletonLink()
 {
-	if (link_ != nullptr) {
-		link_->enable(false);
-		delete link_;
+	if (_link != nullptr) {
+		_link->enable(false);
+		delete _link;
 	}
 }
 
 void AbletonLink::Setup(double tempo)
 {
-	if (link_ != nullptr) {
-		link_->enable(false);
-		delete link_;
+	if (_link != nullptr) {
+		_link->enable(false);
+		delete _link;
 	}
-	link_ = new ableton::Link(tempo);
-	link_->setNumPeersCallback([this](std::size_t peers)
+	_link = new ableton::Link(tempo);
+	_link->setNumPeersCallback([this](std::size_t peers)
 	{
-		isNumPeersChanged_ = true;
-		numPeers_ = static_cast<int>(peers);
+		_isNumPeersChanged = true;
+		_numPeers = static_cast<int>(peers);
 	});
 
-	link_->setTempoCallback([this](const double bpm)
+	_link->setTempoCallback([this](const double bpm)
 	{
-		isTempoChanged_ = true;
-		tempo_ = bpm;
+		_isTempoChanged = true;
+		_tempo = bpm;
 	});
-	link_->enable(true);
+	_link->enable(true);
 }
 
 void AbletonLink::SetTempo(double bpm)
 {
-	if (link_ == nullptr)
+	if (_link == nullptr)
 	{
 		return;
 	}
-	auto state = link_->captureAppSessionState();
-	const auto time = link_->clock().micros();
+	auto state = _link->captureAppSessionState();
+	const auto time = _link->clock().micros();
 	state.setTempo(bpm, time);
-	link_->commitAppSessionState(state);
+	_link->commitAppSessionState(state);
 }
 
 double AbletonLink::Tempo()
 {
-	if (link_ == nullptr)
+	if (_link == nullptr)
 	{
 		return 0.0;
 	}
-	return link_->captureAppSessionState().tempo();
+	return _link->captureAppSessionState().tempo();
 }
 
 void AbletonLink::SetQuantum(double quantum)
 {
-	this->quantum_ = fmin(fmax(quantum, 2.0), 16.0);
+	this->_quantum = fmin(fmax(quantum, 2.0), 16.0);
 }
 
 double AbletonLink::Quantum()
 {
-	return quantum_;
+	return _quantum;
 }
 
 void AbletonLink::ForceBeatAtTime(double beat)
 {
-	if (link_ == nullptr)
+	if (_link == nullptr)
 	{
 		return;
 	}
-	auto state = link_->captureAppSessionState();
-	const auto time = link_->clock().micros();
-	state.forceBeatAtTime(beat, time, quantum_);
-	link_->commitAppSessionState(state);
+	auto state = _link->captureAppSessionState();
+	const auto time = _link->clock().micros();
+	state.forceBeatAtTime(beat, time, _quantum);
+	_link->commitAppSessionState(state);
 }
 
 void AbletonLink::RequestBeatAtTime(double beat)
 {
-	if (link_ == nullptr)
+	if (_link == nullptr)
 	{
 		return;
 	}
-	auto state = link_->captureAppSessionState();
-	const auto time = link_->clock().micros();
-	state.requestBeatAtTime(beat, time, quantum_);
-	link_->commitAppSessionState(state);
+	auto state = _link->captureAppSessionState();
+	const auto time = _link->clock().micros();
+	state.requestBeatAtTime(beat, time, _quantum);
+	_link->commitAppSessionState(state);
 }
 
 void AbletonLink::Enable(bool bEnable)
 {
-	if (link_ == nullptr)
+	if (_link == nullptr)
 	{
 		return;
 	}
-	link_->enable(bEnable);
+	_link->enable(bEnable);
 }
 
 bool AbletonLink::IsEnabled() const
 {
-	if (link_ == nullptr)
+	if (_link == nullptr)
 	{
 		return false;
 	}
-	return link_->isEnabled();
+	return _link->isEnabled();
 }
 
 std::size_t AbletonLink::NumPeers()
 {
-	if (link_ == nullptr)
+	if (_link == nullptr)
 	{
 		return 0;
 	}
-	return link_->numPeers();
+	return _link->numPeers();
 }
 
 AbletonLink::Status AbletonLink::Update()
 {
 	Status status;
-	if (link_ == nullptr)
+	if (_link == nullptr)
 	{
 		return status;
 	}
 
-	auto state = link_->captureAppSessionState();
-	const auto time = link_->clock().micros();
+	ableton::Link::SessionState state = _link->captureAppSessionState();
+	const std::chrono::microseconds time = _link->clock().micros();
 
-	status.beat = state.beatAtTime(time, quantum_);
-	status.phase = state.phaseAtTime(time, quantum_);
-	status.quantam = quantum_;
-	status.tempo = state.tempo();
+	status.beat = state.beatAtTime(time, _quantum);
+	status.phase = state.phaseAtTime(time, _quantum);
+	status.quantam = _quantum;
+	status.tempo = state.tempo(); 
 	status.time = std::chrono::duration_cast<std::chrono::milliseconds>(time).count();
-	status.numPeers = static_cast<int>(link_->numPeers());
+	status.numPeers = static_cast<int>(_link->numPeers());
 
 	//    if (isNumPeersChanged && npc != nullptr) {
 	//        isNumPeersChanged = false;
