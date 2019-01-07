@@ -55,7 +55,7 @@ void AbletonLink::SetTempo(double bpm)
 	_link->commitAppSessionState(state);
 }
 
-double AbletonLink::Tempo()
+double AbletonLink::GetTempo()
 {
 	if (_link == nullptr)
 	{
@@ -69,7 +69,7 @@ void AbletonLink::SetQuantum(double quantum)
 	this->_quantum = fmin(fmax(quantum, 2.0), 16.0);
 }
 
-double AbletonLink::Quantum()
+double AbletonLink::GetQuantum()
 {
 	return _quantum;
 }
@@ -98,7 +98,7 @@ void AbletonLink::RequestBeatAtTime(double beat)
 	_link->commitAppSessionState(state);
 }
 
-void AbletonLink::Enable(bool bEnable)
+void AbletonLink::SetEnabled(bool bEnable)
 {
 	if (_link == nullptr)
 	{
@@ -116,7 +116,7 @@ bool AbletonLink::IsEnabled() const
 	return _link->isEnabled();
 }
 
-std::size_t AbletonLink::NumPeers()
+std::size_t AbletonLink::GetNumPeers()
 {
 	if (_link == nullptr)
 	{

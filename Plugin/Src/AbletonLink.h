@@ -57,18 +57,18 @@ public:
 	void Setup(double bpm);
 
 	void SetTempo(double bpm);
-	double Tempo();
+	double GetTempo();
 
 	void SetQuantum(double quantum);
-	double Quantum();
+	double GetQuantum();
 
 	void ForceBeatAtTime(double beat);
 	void RequestBeatAtTime(double beat);
 
-	void Enable(bool bEnable);
+	void SetEnabled(bool bEnable);
 	bool IsEnabled() const;
 
-	std::size_t NumPeers();
+	std::size_t GetNumPeers();
 
 	Status Update();
 
