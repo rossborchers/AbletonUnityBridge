@@ -1,9 +1,10 @@
 # Ableton Unity Bridge
 Tools to connect Ableton and Unity
 
-Currently, this project supports Link with some Unity side callback scaffolding.
+This project is a WIP! Currently, supports Link with some Unity scaffolding for things to come :)
 
 # Rationale
+
 Music visualization tools suck, game developers can do better, but Ableton integration is barely existent. The hope is this bridge can reduce the effort musicians and developers need to work together.
 
 Intended for installations or performances. Requires that Ableton be installed and open (if it's possible to rip out the Ableton core and include it in a build that'd be cool but I doubt it)
