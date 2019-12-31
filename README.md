@@ -1,7 +1,7 @@
 # AbletonUnityBridge
 Tools to connect Ableton and Unity
 
-Currently this project only supports link with some Unity side callback scaffolding.
+Currently this project supports link with some Unity side callback scaffolding.
 
 # Still to do:
 - Better expose link for less use case assumptions
