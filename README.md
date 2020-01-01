@@ -18,6 +18,5 @@ Intended for installations or performances. Requires that Ableton be installed a
 Im unsure about the feasibility of some of this as Ableton seems quite closed. I was hoping to send PCM/midi/automation from unity to Ableton and back (hijack the realtime DSP library) This may be possible using a virtual device/vst or something but I'm not sure at this point.
 
 #### This project is very early in development but if you like the idea and want to contribute or chat about it let me know!
-rossborchers@gmail.com
 
 
